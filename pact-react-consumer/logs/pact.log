@@ -1,0 +1,114 @@
+I, [2020-09-28T23:57:55.300494 #92129]  INFO -- : Registered expected interaction POST /graphql
+D, [2020-09-28T23:57:55.301004 #92129] DEBUG -- : {
+  "description": "a GetHero Query",
+  "request": {
+    "method": "POST",
+    "path": "/graphql",
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "operationName": "GetHero",
+      "query": {
+        "json_class": "Pact::Term",
+        "data": {
+          "generate": "\n                    query GetHero($heroId: Int!) {\n                      hero(id: $heroId) {\n                          name\n                          superpower\n                          __typename\n                      }\n                    }",
+          "matcher": {"json_class":"Regexp","o":0,"s":"\\s*query\\s*GetHero\\(\\$heroId:\\s*Int!\\)\\s*\\{\\s*hero\\(id:\\s*\\$heroId\\)\\s*\\{\\s*name\\s*superpower\\s*__typename\\s*\\}\\s*\\}"}
+        }
+      },
+      "variables": {
+        "heroId": 42
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": {
+        "json_class": "Pact::Term",
+        "data": {
+          "generate": "application/json; charset=utf-8",
+          "matcher": {"json_class":"Regexp","o":0,"s":"application\\/json; *charset=utf-8"}
+        }
+      }
+    },
+    "body": {
+      "data": {
+        "hero": {
+          "name": {
+            "json_class": "Pact::SomethingLike",
+            "contents": "Superman"
+          },
+          "superpower": {
+            "json_class": "Pact::SomethingLike",
+            "contents": "Flying"
+          },
+          "__typename": "Hero"
+        }
+      }
+    }
+  }
+}
+I, [2020-09-28T23:57:55.320346 #92129]  INFO -- : Received request POST /graphql
+D, [2020-09-28T23:57:55.320568 #92129] DEBUG -- : {
+  "path": "/graphql",
+  "query": "",
+  "method": "post",
+  "body": {
+    "operationName": "GetHero",
+    "variables": {
+      "heroId": 42
+    },
+    "query": "query GetHero($heroId: Int!) {\n  hero(id: $heroId) {\n    name\n    superpower\n    __typename\n  }\n}\n"
+  },
+  "headers": {
+    "Content-Length": "169",
+    "Content-Type": "application/json",
+    "Accept": "*/*",
+    "User-Agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
+    "Accept-Encoding": "gzip,deflate",
+    "Connection": "close",
+    "Host": "localhost:8080",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2020-09-28T23:57:55.321117 #92129]  INFO -- : Found matching response for POST /graphql
+D, [2020-09-28T23:57:55.321403 #92129] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": {
+      "json_class": "Pact::Term",
+      "data": {
+        "generate": "application/json; charset=utf-8",
+        "matcher": {
+          "json_class": "Regexp",
+          "o": 0,
+          "s": "application\\/json; *charset=utf-8"
+        }
+      }
+    }
+  },
+  "body": {
+    "data": {
+      "hero": {
+        "name": {
+          "json_class": "Pact::SomethingLike",
+          "contents": "Superman"
+        },
+        "superpower": {
+          "json_class": "Pact::SomethingLike",
+          "contents": "Flying"
+        },
+        "__typename": "Hero"
+      }
+    }
+  }
+}
+I, [2020-09-28T23:57:55.332397 #92129]  INFO -- : Verifying - interactions matched
+I, [2020-09-28T23:57:55.336812 #92129]  INFO -- : Cleared interactions
+I, [2020-09-28T23:57:55.342492 #92129]  INFO -- : Updating pact for graphql-hero-provider at /home/toni/Projects/pact-examples/pact-react-consumer/pacts/graphql-hero-consumer-graphql-hero-provider.json
+I, [2020-09-28T23:57:55.344037 #92129]  INFO -- : *****************************************************************************
+I, [2020-09-28T23:57:55.344221 #92129]  INFO -- : Updating existing file ./home/toni/Projects/pact-examples/pact-react-consumer/pacts/graphql-hero-consumer-graphql-hero-provider.json as pactfile_write_mode is :update
+I, [2020-09-28T23:57:55.344273 #92129]  INFO -- : Only interactions defined in this test run will be updated.
+I, [2020-09-28T23:57:55.344318 #92129]  INFO -- : As interactions are identified by description and provider state, pleased note that if either of these have changed, the old interactions won't be removed from the pact file until the specs are next run with :pactfile_write_mode => :overwrite.
+I, [2020-09-28T23:57:55.344386 #92129]  INFO -- : *****************************************************************************

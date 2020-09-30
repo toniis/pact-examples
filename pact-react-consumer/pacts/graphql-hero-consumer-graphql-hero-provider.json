@@ -1,0 +1,65 @@
+{
+  "consumer": {
+    "name": "graphql-hero-consumer"
+  },
+  "provider": {
+    "name": "graphql-hero-provider"
+  },
+  "interactions": [
+    {
+      "description": "a GetHero Query",
+      "request": {
+        "method": "POST",
+        "path": "/graphql",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "operationName": "GetHero",
+          "query": "\n                    query GetHero($heroId: Int!) {\n                      hero(id: $heroId) {\n                          name\n                          superpower\n                          __typename\n                      }\n                    }",
+          "variables": {
+            "heroId": 42
+          }
+        },
+        "matchingRules": {
+          "$.body.query": {
+            "match": "regex",
+            "regex": "\\s*query\\s*GetHero\\(\\$heroId:\\s*Int!\\)\\s*\\{\\s*hero\\(id:\\s*\\$heroId\\)\\s*\\{\\s*name\\s*superpower\\s*__typename\\s*\\}\\s*\\}"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "data": {
+            "hero": {
+              "name": "Superman",
+              "superpower": "Flying",
+              "__typename": "Hero"
+            }
+          }
+        },
+        "matchingRules": {
+          "$.headers.Content-Type": {
+            "match": "regex",
+            "regex": "application\\/json; *charset=utf-8"
+          },
+          "$.body.data.hero.name": {
+            "match": "type"
+          },
+          "$.body.data.hero.superpower": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
